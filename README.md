@@ -1,0 +1,1 @@
+This is a starter kit for simple Front-End projects with React and Redux. It also comes with simple promise-based API structure, and optional Express/Koa as Back-End.
