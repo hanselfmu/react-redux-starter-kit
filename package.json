@@ -4,7 +4,11 @@
   "description": "React + Redux starter kit for front-end, including simple backend structure.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "webpack --watch --verbose --colors --display-error-details --config webpack/dev.config.js",
+    "build-dev": "webpack --verbose --colors --display-error-details --config webpack/dev.config.js",
+    "build-prod": "rm -rf ./build/* && webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+    "build-profiling": "webpack --verbose --colors --profiles --display-modules --display-error-details --config webpack/prod.config.js",
+    "lint": "eslint -c .eslintrc js/app"
   },
   "repository": {
     "type": "git",
@@ -18,9 +22,12 @@
   "homepage": "https://github.com/hanselfmu/react-redux-boilerplate#readme",
   "dependencies": {
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "redux": "^3.6.0"
   },
   "devDependencies": {
+    "babel-core": "^6.18.2",
+    "babel-loader": "^6.2.8",
     "webpack": "^1.13.3"
   }
 }

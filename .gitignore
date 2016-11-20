@@ -1,0 +1,29 @@
+# idea ignore
+.idea/
+*.ipr
+/src/test
+*.iml
+*.iws
+
+# temp ignore
+*.log*
+*.cache
+*.diff
+*.patch
+*.tmp
+*.swp
+
+# system ignore
+.DS_Store
+Thumbs.db
+hs_err_pid*
+
+# sass ignore
+.sass-cache/
+*.css.map
+
+＃js ignore
+*.js.map
+
+# npm ingore
+node_modules/
