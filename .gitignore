@@ -18,7 +18,7 @@
 Thumbs.db
 hs_err_pid*
 
-# sass ignore
+# css ignore
 .sass-cache/
 *.css.map
 
