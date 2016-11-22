@@ -4,10 +4,16 @@
   "description": "React + Redux starter kit for front-end, including simple backend structure.",
   "main": "server.js",
   "scripts": {
-    "watch": "webpack --watch --verbose --colors --display-error-details --config webpack/dev.config.js",
-    "build-dev": "webpack --verbose --colors --display-error-details --config webpack/dev.config.js",
-    "build-prod": "rm -rf ./build/* && webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "build-profiling": "webpack --verbose --colors --profiles --display-modules --display-error-details --config webpack/prod.config.js",
+    "watch": "npm run watch-fe & npm run watch-be",
+    "build-dev": "npm run build-fe-dev & npm run build-be-dev",
+    "build-prod": "",
+    "watch-fe": "webpack --watch --verbose --colors --display-error-details --config webpack/dev.config.js",
+    "build-fe-dev": "webpack --verbose --colors --display-error-details --config webpack/dev.config.js",
+    "build-fe-prod": "rm -rf ./build/* && webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
+    "build-fe-profiling": "webpack --verbose --colors --profiles --display-modules --display-error-details --config webpack/prod.config.js",
+    "watch-be": "nodemon backend/app.js --exec babel-node",
+    "build-be-dev": "babel-node backend/app.js",
+    "build-be-prod": "",
     "lint": "eslint -c .eslintrc js/app"
   },
   "repository": {
@@ -21,14 +27,18 @@
   },
   "homepage": "https://github.com/hanselfmu/react-redux-boilerplate#readme",
   "dependencies": {
+    "koa": "^2.0.0",
+    "koa-route": "^2.4.2",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "redux": "^3.6.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.8",
     "babel-plugin-react-transform": "^2.0.2",
+    "babel-plugin-transform-async-to-generator": "^6.16.0",
     "babel-plugin-transform-object-rest-spread": "^6.19.0",
     "babel-plugin-transform-runtime": "^6.15.0",
     "babel-plugin-typecheck": "^3.9.0",
@@ -36,7 +46,10 @@
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "babel-preset-stage-0": "^6.16.0",
+    "babel-preset-stage-3": "^6.17.0",
+    "babel-register": "^6.18.0",
     "extract-text-webpack-plugin": "^1.0.1",
+    "nodemon": "^1.11.0",
     "webpack": "^1.13.3"
   }
 }

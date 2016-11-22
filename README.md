@@ -12,15 +12,29 @@ This starter kit has some prerequisites and assumptions about the runtime enviro
     2. https://subvisual.co/blog/posts/32-our-css-sass-project-architecture-and-styleguide
     3. http://timhartmann.net/frontend-development/scss-styleguide-with-bem-oocss-smacss/
     4. http://thesassway.com/beginner/how-to-structure-a-sass-project
+
 and I personally prefer the architecture from scotch.io. It is enough to handle a complex SPA, yet still simple enough to be understandable.
 However I tuned it down a little so that it does not have "pages" folder, or "themes" folder.
+
 In BEM, an application is visually divided into blocks, and then elements to form blocks. In SMACSS, it is divided into Layout and Modules. In the 7-to-1 Design, it is divided into modules and components.
 In all these designs above, it is clear that there are 2 layers of categories, from simple to complex, from small to big. Therefore we divide
 our pages into reusable components like headers or nav bars, and components are divided into common elements like buttons and inputs.
+
 "Modules" folder serves more like a utility folder; it does not have relations with page division.
+
 Since we are incorporating with React, it's better to map style/components to js/components. Therefore we will have all the components, be it a simple button, or a complex form, inside "components".
  
  
+We use some ES2015 features that are not shipped with Node.js, namely, async functions and such, so we will need separate babel transformations for frontend and backend, thus the separate babelrc files.
+
+# Notes on Modular JS
+We use and prefer ES2015 modules, with named imports, exports, and export default. The difference, and the advantage over CommonJS, is that CommonJS does not support named exports by itself. module.exports in CJS is a single value, and does not provide much flexibility as ES2015's module system.
+For interoperability between ES2015 and CJS, check out the following link for reference:
+https://github.com/nodejs/node-eps/blob/master/002-es6-modules.md#54-es-consuming-commonjs
+
+
+
+
 # Notes on Redux
 1. (From Redux site) " Action creators let you decouple additional logic around dispatching an action, from the actual components emitting those actions. It's very handy when the application is under heavy development, and the requirements change often."
 This is why we use Redux boilerplate, or boilerplates in general: they make developing heavy and complex apps much easier, and developers can focus

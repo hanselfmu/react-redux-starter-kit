@@ -9,7 +9,7 @@ var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var assetsPath = path.resolve(__dirname, '../frontend/build')
 
-var babelrc = fs.readFileSync('./.babelrc')
+var babelrc = fs.readFileSync('./frontend/.babelrc')
 
 var babelrcObject = {}
 try {
