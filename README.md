@@ -41,7 +41,7 @@ Sadly we prefer semicolons at the end of Javascript statements, although it look
 1. https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function
 2. https://stackoverflow.com/questions/16664824/no-semicolon-before-is-causing-error-in-javascript
 
-Although JS provides "automatic semicolon insertion", it would fail at those tiny details that would drive developers crazy.
+Although JS provides "automatic semicolon insertion" (as in http://www.ecma-international.org/ecma-262/6.0/#sec-automatic-semicolon-insertion), it fails at certain edge cases that would drive developers crazy.
 
 
 # Notes on Modular JS
