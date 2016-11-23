@@ -1,7 +1,25 @@
 /**
  * Created by chan on 11/20/16.
  */
-import test from './actions'
+import 'babel-polyfill';
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route, Link, browserHistory } from 'react-router';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers';
 
-console.log("hello world again")
-console.log(test)
+const store = createStore(rootReducer);
+
+render((
+    <Provider store={store}>
+        <Router history={browserHistory}>
+            <Route path="/" component={App}>
+                <Route path="about" component={About}/>
+                <Route path="users" component={Users}>
+            </Route>
+            <Route path="*" component={NoMatch}/>
+            </Route>
+        </Router>
+    </Provider>
+), document.getElementById('root'));

@@ -11,8 +11,8 @@
     "build-fe-dev": "webpack --verbose --colors --display-error-details --config webpack/dev.config.js",
     "build-fe-prod": "rm -rf ./build/* && webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "build-fe-profiling": "webpack --verbose --colors --profiles --display-modules --display-error-details --config webpack/prod.config.js",
-    "watch-be": "nodemon backend/app.js --exec babel-node",
-    "build-be-dev": "babel-node backend/app.js",
+    "watch-be": "nodemon backend/app.js",
+    "build-be-dev": "",
     "build-be-prod": "",
     "lint": "eslint -c .eslintrc js/app"
   },
@@ -27,11 +27,14 @@
   },
   "homepage": "https://github.com/hanselfmu/react-redux-boilerplate#readme",
   "dependencies": {
-    "koa": "^2.0.0",
-    "koa-route": "^2.4.2",
+    "express": "^4.14.0",
+    "keymirror": "^0.1.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
-    "redux": "^3.6.0"
+    "react-router": "^3.0.0",
+    "react-router-redux": "^4.0.7",
+    "redux": "^3.6.0",
+    "redux-actions": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",

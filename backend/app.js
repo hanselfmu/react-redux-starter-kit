@@ -1,27 +1,22 @@
 /**
  * Created by chan on 11/22/16.
  */
-const Koa = require('koa')
-const route = require('koa-route')
-const app = new Koa()
+const express = require('express');
+const app = new express();
+const path = require('path');
 
-app.use(async function (ctx, next) {
-    const start = new Date()
-    await next()
-    const ms = new Date() - start
-    ctx.set('X-Response-Time', `${ms}ms`)
-})
+const port = process.env.PORT || 3000;
 
-// logger
+app.use(express.static('frontend'));
 
-app.use(async function (ctx, next) {
-    const start = new Date()
-    await next()
-    const ms = new Date() - start
-    console.log(`${ctx.method} ${ctx.url} - ${ms}`)
-})
+/**
+ * Note: Generally we don't need an application server for serving
+ * static files; instead we can use a web server such as nginx for static resources.
+ */
+app.get("/", function(req, res) {
+    res.sendFile(path.resolve('frontend/app.html'));
+});
 
-// response
-app.use(route.get('/app', serve('../frontend/app.html')))
-
-app.listen(3000)
+app.listen(port, function() {
+    console.log(`server listening on port ${port}`);
+});
