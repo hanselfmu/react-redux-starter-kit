@@ -13,8 +13,8 @@ app.use(express.static('frontend'));
  * Note: Generally we don't need an application server for serving
  * static files; instead we can use a web server such as nginx for static resources.
  */
-app.get("/", function(req, res) {
-    res.sendFile(path.resolve('frontend/app.html'));
+app.get("*", function(req, res) {
+    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'app.html'));
 });
 
 app.listen(port, function() {

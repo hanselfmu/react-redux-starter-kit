@@ -67,7 +67,6 @@ module.exports = {
         filename: '[name].js'  // in the form of "application-9328472034.js"
     },
     externals: {
-        "jquery": 'jQuery',
         "react": "React",
         "react-dom": "ReactDOM"    // lol this is the trickiest thing I've seen in Webpack
     },
