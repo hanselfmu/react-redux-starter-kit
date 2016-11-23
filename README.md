@@ -37,6 +37,7 @@ We use some ES2015 features that are not shipped with Node.js, namely, async fun
 When in doubt, we try to stick to Airbnb's style guides as close as possible.
 
 Sadly we prefer semicolons at the end of Javascript statements, although it looks hideous. Some posts about why it is necessary:
+
 1. https://stackoverflow.com/questions/7365172/semicolon-before-self-invoking-function
 2. https://stackoverflow.com/questions/16664824/no-semicolon-before-is-causing-error-in-javascript
 
