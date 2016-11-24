@@ -3,7 +3,10 @@
  */
 function Header() {
     return (
-        <header>I am a Header</header>
+        <header>
+            <img src="assets/wusong_logo.png" />
+            <nav></nav>
+        </header>
     )
 }
 

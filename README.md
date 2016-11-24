@@ -53,10 +53,15 @@ https://github.com/nodejs/node-eps/blob/master/002-es6-modules.md#54-es-consumin
 
 
 # Notes on Redux
-1. (From Redux site) " Action creators let you decouple additional logic around dispatching an action, from the actual components emitting those actions. It's very handy when the application is under heavy development, and the requirements change often."
+1. (From Redux site) "Action creators let you decouple additional logic around dispatching an action, from the actual components emitting those actions. It's very handy when the application is under heavy development, and the requirements change often."
 This is why we use Redux boilerplate, or boilerplates in general: they make developing heavy and complex apps much easier, and developers can focus
-much more on application logic, rather than tooling or architecture during the development cycle.
+much more on application logic, rather than tooling or architecture during the development cycle." This quote explains the primary purpose of not only using action creators, but also this starter kit as well.
 2. We respect Flux and Redux's idea of keeping "actions" in a certain shape, check out https://github.com/acdlite/flux-standard-action for more. Therefore we use redux-actions to generate FSAs, at the same time reducing some boilerplates from Redux.
+3. In terms of routing, React-Router will work with Redux just fine in many simple cases, but when we need to update components based on route changes or take actions on url parameters, it is recommended that we use either react-router-redux or redux-router.
+The differences between these two bindings are nicely explained here:
+https://github.com/acdlite/redux-router#differences-with-react-router-redux
+
+We will use react-router-redux by default, but feel free to exclude it, or use redux-router if it fits your needs.
 
 # Notes on Backend
 This is not a backend-focused starter kit, and this backend layer is very thin -- hardly any business logic, mostly just a communication layer between the real backend on a Java Tomcat server and the pure frontend.

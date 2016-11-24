@@ -10,5 +10,8 @@ export default keymirror({
     TODO_CREATE: null,
     TODO_READ: null,
     TODO_UPDATE: null,
-    TODO_DELETE: null
+    TODO_DELETE: null,
+
+    FILTER_UPDATE: null,
+    FILTER_RESET: null
 })

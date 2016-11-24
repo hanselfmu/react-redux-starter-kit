@@ -1,26 +1,16 @@
 /**
  * Created by chan on 11/23/16.
  */
-let nextTodoId = 0;
+import ActionTypes from '../constants/ActionTypes';
 
-export const createTodo = (text) => {
-    return {
-        type: 'ADD_TODO',
-        id: nextTodoId++,
-        text
-    }
+export function createTodo(text) {
+    return { type: ActionTypes.TODO_CREATE, text };
 }
 
-export const setVisibilityFilter = (filter) => {
-    return {
-        type: 'SET_VISIBILITY_FILTER',
-        filter
-    }
+export function deleteTodo(id) {
+    return { type: ActionTypes.TODO_DELETE, id };
 }
 
-export const toggleTodo = (id) => {
-    return {
-        type: 'TOGGLE_TODO',
-        id
-    }
+export function updateTodo(id, text) {
+    return { type: ActionTypes.TODO_UPDATE, id, text };
 }
