@@ -11,7 +11,7 @@ The following things are NOT opinionated, or not integral to this kit, thus open
 2. whether it is universal/isomorphic React or not
 
 # Project Structure Notes
-1. Traditionally backend-focused (i.e. Node Express) starter kits put frontend code in a folder called "public", and frontend-focused starter kits put backend code in a simple "server.js" file. This starter kit, while putting frontend as its main concern, will try to address the inherent complexity of backend in structure as well. Therefore, we have separate "frontend" and "backend" source folders for each side.
+1. Traditionally backend-focused (i.e. Node Express) starter kits put frontend code in a folder called "public", and frontend-focused starter kits put backend code in a simple "server.js" file. This starter kit, while putting frontend as its main concern, will try to address the inherent complexity of backend in structure as well. Therefore, we have separate "client" and "server" source folders for each side.
 2. We put assets (images) inside style folder, because we need to accommodate possible sprite images.
 3. There are several different design patterns in terms of style folder structure, as in:
     1. https://scotch.io/tutorials/aesthetic-sass-1-architecture-and-style-organization

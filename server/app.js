@@ -4,21 +4,28 @@
 const express = require('express');
 const app = new express();
 const path = require('path');
+const router = require('./routes')(express.Router());
 
 const port = process.env.PORT || 3000;
 
-app.use(express.static('frontend'));
+app.use(express.static('client'));
 
 /**
  * Note: Generally we don't need an application server for serving
  * static files; instead we can use a web server such as nginx for static resources.
  */
 app.get('/assets/*', function(req, res) {
-    console.log(req);
+    res.sendFile(path.resolve(__dirname, '../client/style' + req.path));
 });
 
+app.get('/build/*', function(req, res) {
+    res.sendFile(path.resolve(__dirname, '../client/build' + req.path));
+});
+
+app.use('/api', router);
+
 app.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, '..', 'frontend', 'app.html'));
+    res.sendFile(path.resolve(__dirname, '..', 'client', 'app.html'));
 });
 
 app.listen(port, function() {

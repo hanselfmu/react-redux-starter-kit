@@ -7,9 +7,9 @@ var fs = require('fs')
 var path = require('path')
 var webpack = require('webpack')
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var assetsPath = path.resolve(__dirname, '../frontend/build')
+var assetsPath = path.resolve(__dirname, '../client/build')
 
-var babelrc = fs.readFileSync('./frontend/.babelrc')
+var babelrc = fs.readFileSync('./client/.babelrc')
 
 var babelrcObject = {}
 try {
@@ -61,7 +61,7 @@ reactTransform[1].transforms.push({
 module.exports = {
     devtool: 'inline-source-map',
     context: path.resolve(__dirname, '..'),
-    entry: ['./frontend/js/app.js'],
+    entry: ['./client/js/app.js'],
     output: {
         path: assetsPath,
         filename: '[name].js'  // in the form of "application-9328472034.js"

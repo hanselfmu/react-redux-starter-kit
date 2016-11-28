@@ -11,7 +11,7 @@
     "build-fe-dev": "webpack --verbose --colors --display-error-details --config webpack/dev.config.js",
     "build-fe-prod": "rm -rf ./build/* && webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "build-fe-profiling": "webpack --verbose --colors --profiles --display-modules --display-error-details --config webpack/prod.config.js",
-    "watch-be": "nodemon backend/app.js",
+    "watch-be": "nodemon server/app.js",
     "build-be-dev": "",
     "build-be-prod": "",
     "lint": "eslint -c .eslintrc js/app"
@@ -27,8 +27,10 @@
   },
   "homepage": "https://github.com/hanselfmu/react-redux-starter-kit#readme",
   "dependencies": {
+    "co-express": "^1.2.2",
     "express": "^4.14.0",
     "keymirror": "^0.1.1",
+    "mz": "^2.6.0",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.4.6",
