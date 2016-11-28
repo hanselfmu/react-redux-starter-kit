@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "React + Redux starter kit for front-end, including simple backend structure.",
   "main": "server.js",
+  "engines": {
+    "node": ">=6.0.0"
+  },
   "scripts": {
     "watch": "npm run watch-fe & npm run watch-be",
     "build-dev": "npm run build-fe-dev & npm run build-be-dev",
@@ -11,7 +14,7 @@
     "build-fe-dev": "webpack --verbose --colors --display-error-details --config webpack/dev.config.js",
     "build-fe-prod": "rm -rf ./build/* && webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
     "build-fe-profiling": "webpack --verbose --colors --profiles --display-modules --display-error-details --config webpack/prod.config.js",
-    "watch-be": "nodemon server/app.js",
+    "watch-be": "nodemon server/app.js --config server/nodemon.json",
     "build-be-dev": "",
     "build-be-prod": "",
     "lint": "eslint -c .eslintrc js/app"
@@ -27,7 +30,6 @@
   },
   "homepage": "https://github.com/hanselfmu/react-redux-starter-kit#readme",
   "dependencies": {
-    "co-express": "^1.2.2",
     "express": "^4.14.0",
     "keymirror": "^0.1.1",
     "mz": "^2.6.0",

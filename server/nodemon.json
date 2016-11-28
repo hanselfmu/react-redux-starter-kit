@@ -1,0 +1,8 @@
+{
+  "verbose": true,
+  "ignore": ["client/**"],
+  "delay": "2000",
+  "execMap": {
+    "js": "babel-node"
+  }
+}

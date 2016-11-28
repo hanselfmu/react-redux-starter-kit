@@ -3,15 +3,15 @@
  *
  * Webpack config for development
  */
-var fs = require('fs')
-var path = require('path')
-var webpack = require('webpack')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var assetsPath = path.resolve(__dirname, '../client/build')
+var fs = require('fs');
+var path = require('path');
+var webpack = require('webpack');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var assetsPath = path.resolve(__dirname, '../client/build');
 
-var babelrc = fs.readFileSync('./client/.babelrc')
+var babelrc = fs.readFileSync('./client/.babelrc');
 
-var babelrcObject = {}
+var babelrcObject = {};
 try {
     babelrcObject = JSON.parse(babelrc);
 } catch (err) {

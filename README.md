@@ -1,7 +1,7 @@
 This is a starter kit for simple frontend projects with React and Redux. It also comes with simple promise-based API structure, and optional Express/Koa as backend.
 
 This starter kit has some prerequisites and assumptions about the runtime environment of the project:
-1. it needs a Node server on the backend;
+1. it needs a Node server on the backend, and the Node version should be no less than v6.0.0 (so that I don't need "use strict" in every function scope);
 2. it assumes that the application sits on HTTPS, and we have HTTP2 enabled.
 
 This starter kit is somewhat opinionated, meaning that there are certain preferred tools and predefined structures that follow certain standards.
