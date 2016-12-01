@@ -1,9 +1,11 @@
 /**
  * Created by chan on 11/24/16.
  */
-import React from 'react'
-import { connect } from 'react-redux'
-import { createTodo } from '../actions'
+import React from 'react';
+import { connect } from 'react-redux';
+import { addTodo } from '../actions/todos';
+
+console.log(addTodo);
 
 let CreateTodo = ({ dispatch }) => {
     let input

@@ -29,7 +29,12 @@ our pages into reusable components like headers or nav bars, and components are 
 "Modules" folder serves more like a utility folder; it does not have relations with page division.
 
 Since we are incorporating with React, it's better to map style/components to js/components. Therefore we will have all the components, be it a simple button, or a complex form, inside "components".
- 
+
+# Redux Structure Notes
+1. We got rid of "js/actions/index.js", which is used from some other tutorials or boilerplates. This file serves mainly as a centralized module that imports all the separate actions from individual action modules, and export them all together
+using the syntax "export default {  ...actionGroup1, ...actionGroup2 }". When you want to use actions to dispatch, you would do "import { action1, action2 } from './js/actions/';".
+While this is a nice way to define and use actions, since we stick with ES6 modules, it is not easy to use this style because of the static module system, and the fact that ES6 would treat default export as a named export.
+Therefore we would end up doing "import actions from './js/actions/'; dispatch(actions.action1); "
  
 We use some ES2015 features that are not shipped with Node.js, namely, async functions and such, so we will need separate babel transformations for frontend and backend, thus the separate babelrc files.
 
@@ -49,9 +54,6 @@ We use and prefer ES2015 modules, with named imports, exports, and export defaul
 For interoperability between ES2015 and CJS, check out the following link for reference:
 https://github.com/nodejs/node-eps/blob/master/002-es6-modules.md#54-es-consuming-commonjs
 
-
-
-
 # Notes on Redux
 1. (From Redux site) "Action creators let you decouple additional logic around dispatching an action, from the actual components emitting those actions. It's very handy when the application is under heavy development, and the requirements change often."
 This is why we use Redux boilerplate, or boilerplates in general: they make developing heavy and complex apps much easier, and developers can focus
@@ -62,6 +64,11 @@ The differences between these two bindings are nicely explained here:
 https://github.com/acdlite/redux-router#differences-with-react-router-redux
 
 We will use react-router-redux by default, but feel free to exclude it, or use redux-router if it fits your needs.
+
+We use redux-actions to generate our actions and reducers. Facilitating flux-standard-actions reduces the possibility of action/reducer-related bugs.
+https://github.com/acdlite/redux-actions
+
+
 
 # Notes on Backend
 This is not a backend-focused starter kit, and this backend layer is very thin -- hardly any business logic, mostly just a communication layer between the real backend on a Java Tomcat server and the pure frontend.
