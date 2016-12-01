@@ -3,6 +3,7 @@
  */
 import { createAction } from 'redux-actions';
 import ActionTypes from '../constants/ActionTypes';
+import api from '../services/api';
 
 /*
 We need actions like this:
@@ -19,16 +20,32 @@ export function updateTodo(id, text) {
 }
 
 We use singular createAction instead of createActions because
-sometimes we need to adjust actions to use a customized payload creator, and
-that means re-ordering const {...}; also it is clearer for every single action.
+sometimes we need to adjust actions to use a customized payload creator, and doing this with "createActions"
+means re-ordering const {...}; also it is not possible to give actions customized names.
+
+And it is clearer for every single action.
 
 We also opt in for more specific parameters for actions:
 instead of addTodo(obj = {text: '...'}), we prefer addTodo(text), because it leads to more predictability.
  */
-export const addTodo = createAction(ActionTypes.ADD_TODO, (text) => ({ text }));
+export const addTodo = createAction(ActionTypes.ADD_TODO, text => ({ text }));
 
-export const updateTodo = createAction(ActionTypes.UPDATE_TODO, (id, text) => ({ id, text }));
+export const updateTodo = createAction(ActionTypes.UPDATE_TODO, (id, text, status) => ({ id, text, status }));
 
-export const deleteTodo = createAction(ActionTypes.DELETE_TODO, (id) => ({ id }));
+export const deleteTodo = createAction(ActionTypes.DELETE_TODO, id => ({ id }));
 
-export const getTodos = createAction(ActionTypes.GET_TODOS);
+export const getTodos = createAction(ActionTypes.GET_TODOS, function() {
+
+});
+
+//export const getTodos = function() {
+//    return dispatch => {
+//        dispatch()
+//        api.getTodos().then(res => {
+//            console.log(res);
+//            dispatch(receiveTodos(res));
+//        })
+//    }
+//}
+
+export const receiveTodos = createAction(ActionTypes.RECEIVE_TODOS);

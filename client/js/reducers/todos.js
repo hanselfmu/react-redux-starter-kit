@@ -5,49 +5,59 @@
  * {
  *  todos: {
  *      1: {
- *          text: 'item 1'
+ *          text: 'item 1',
+ *          status: 'initial'
  *      },
  *      2: {
- *          text: 'item 2'
+ *          text: 'item 2',
+ *          status: 'completed'
  *      }
  *  },
- *  size: 2
+ *  size: 2,
+ *  nextId: 3
  * }
  *
  * We recommend writing your basic state structure somewhere, e.g. above, or in an overall doc.
  * This way people new the project can catch up fairly quickly.
  */
-import { handleAction, combineActions } from 'redux-actions';
+import { handleActions } from 'redux-actions';
 import ActionTypes from '../constants/ActionTypes';
 
-// const addTodo = handleAction(ActionTypes.ADD_TODO, (state = { todos: [] }, action) => ({
-//     ...state,
-//     todos: [...state.todos, action.payload]
-// }), []);
+const defaultState = {
+    data: {},
+    size: 0,
+    nextId: 0
+}
 
-const addTodo = handleAction(ActionTypes.ADD_TODO, {
-    next(state, action) {
-        console.log("adding")
-    },
-    throw(state, action) {
-        console.log("throwing");
-    }
-}, []);
+export default handleActions({
+    [ActionTypes.ADD_TODO]: (state, action) => {
+        const payload = action.payload;
 
-const getTodos = handleAction(ActionTypes.GET_TODOS, {
-    next(state, action) {
         return {
-            ...state,
-
-        };
+            data: {
+                ...state.data,
+                [state.nextId]: {
+                    text: payload.text,
+                    status: 'initial'
+                }
+            },
+            size: state.size + 1,
+            nextId: state.nextId + 1
+        }
     },
-    throw(state, action) {
-        console.log("throwing!");
+
+    [ActionTypes.GET_TODO]: (state, action) => ({
+        ...state,
+        payload: action.payload
+    }),
+
+    [ActionTypes.RECEIVE_TODOS]: (state, action) => {
+        const payload = action.payload;
+
         return {
-
-        };
-
+            ...payload,
+            size: Object.keys(payload.data).length
+        }
     }
-}, []);
 
-export default handleAction(combineActions(addTodo, getTodos), {}, {});
+}, defaultState);

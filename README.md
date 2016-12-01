@@ -29,12 +29,6 @@ our pages into reusable components like headers or nav bars, and components are 
 "Modules" folder serves more like a utility folder; it does not have relations with page division.
 
 Since we are incorporating with React, it's better to map style/components to js/components. Therefore we will have all the components, be it a simple button, or a complex form, inside "components".
-
-# Redux Structure Notes
-1. We got rid of "js/actions/index.js", which is used from some other tutorials or boilerplates. This file serves mainly as a centralized module that imports all the separate actions from individual action modules, and export them all together
-using the syntax "export default {  ...actionGroup1, ...actionGroup2 }". When you want to use actions to dispatch, you would do "import { action1, action2 } from './js/actions/';".
-While this is a nice way to define and use actions, since we stick with ES6 modules, it is not easy to use this style because of the static module system, and the fact that ES6 would treat default export as a named export.
-Therefore we would end up doing "import actions from './js/actions/'; dispatch(actions.action1); "
  
 We use some ES2015 features that are not shipped with Node.js, namely, async functions and such, so we will need separate babel transformations for frontend and backend, thus the separate babelrc files.
 
@@ -68,7 +62,16 @@ We will use react-router-redux by default, but feel free to exclude it, or use r
 We use redux-actions to generate our actions and reducers. Facilitating flux-standard-actions reduces the possibility of action/reducer-related bugs.
 https://github.com/acdlite/redux-actions
 
+In terms of where should business logic go, we don't prefer either fat-action-thin-reducer style, or thin-action-fat-reducer style. Instead, we try to find the balance between actions and reducers.
+If it is logic about how things should interact, or side-effects, it should probably go into actions; if it is data logic, i.e. how data composes and decomposes, it should probably go into reducers.
 
+## Notes on Redux structure
+1. We use a "pages" folder to keep distinct pages, like About page, Settings page, Login/Register page, and one or more App pages. They are essentially just Redux containers.
+2. We choose traditional "Rails-style" app structure over "Domain-style", because we are more familiar with rails-style, which are also common in backend structures. We will try out domain-style as soon as we have the opportunity.
+
+# Notes on Webpack
+1. We use webpack 1.13 for now;
+2. We watch closely on webpack 2 and its release date, which has its documentations at https://webpack.js.org/. It provides many useful tools compared to Webpack 1.13, including tree shaking and native ES6 import/export.
 
 # Notes on Backend
 This is not a backend-focused starter kit, and this backend layer is very thin -- hardly any business logic, mostly just a communication layer between the real backend on a Java Tomcat server and the pure frontend.
@@ -82,6 +85,11 @@ We choose Express as the primary choice, but you can find Koa-supported backend 
 Koa, on the other hand, is thriving, but it has a bigger learning curve, which does not come easy for developers focusing more on pure frontend tech stack.
 
 # Notes on NPM and package.json
+
+# Caveats
+1. Don't use Babel plugin "transform-runtime" together with "export * from ...". This will cause a bug in Babel, making the built code un-runnable (basically would not translate "import" anymore).
+And since this plugin is mostly used in a library/tool according to Babel, it it recommended not to use it unless you have a very good reason.
+
 
 # What this starter kit has, and does not have
 To better illustrate a proposed frontend app architecture with a layer of Node server, we use a traditional TodoMVC example. Check out http://todomvc.com/ for more information.

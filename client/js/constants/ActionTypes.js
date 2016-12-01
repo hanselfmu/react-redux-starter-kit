@@ -15,8 +15,10 @@ import keymirror from 'keymirror';
 
 export default keymirror({
     ADD_TODO: null,
-    GET_TODO: null,
     GET_TODOS: null,
+    RECEIVE_TODOS: null,
+    GET_TODO: null,
+    RECEIVE_TODO: null,
     UPDATE_TODO: null,
     DELETE_TODO: null,
 

@@ -4,7 +4,7 @@
 const api = require('../middleware/api');
 
 exports.getTodos = async function(req, res) {
-    console.log("I am at controller sending request to API");
+
     // Traditional Promise way
     //api.getTodos().then(data => res.send(data));
 

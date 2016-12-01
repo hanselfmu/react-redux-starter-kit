@@ -3,9 +3,7 @@
  */
 import React from 'react';
 import { connect } from 'react-redux';
-import { addTodo } from '../actions/todos';
-
-console.log(addTodo);
+import { addTodo } from '../actions';
 
 let CreateTodo = ({ dispatch }) => {
     let input
@@ -30,6 +28,7 @@ let CreateTodo = ({ dispatch }) => {
         </div>
     )
 }
+
 CreateTodo = connect()(CreateTodo)
 
 export default CreateTodo

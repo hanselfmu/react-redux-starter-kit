@@ -12,6 +12,7 @@ import logger from 'redux-logger';
 import thunk from 'redux-thunk';
 
 import rootReducer from './reducers';
+import { getTodos } from './actions';
 import TodoApp from './pages/TodoApp';
 import About from './pages/About';
 import Settings from './pages/Settings';
@@ -24,6 +25,10 @@ const store = createStore(
     rootReducer,
     applyMiddleware(...middleware)
 );
+
+console.log(store.dispatch(getTodos.call({
+    dispatch: store.dispatch
+})));
 
 const history = syncHistoryWithStore(browserHistory, store)
 

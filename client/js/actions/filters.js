@@ -4,9 +4,9 @@
 import ActionTypes from '../constants/ActionTypes';
 
 export function updateFilter(filter) {
-    return { type: ActionTypes.FILTER_UPDATE, filter };
+    return { type: ActionTypes.UPDATE_FILTER, filter };
 }
 
 export function resetFilter() {
-    return { type: ActionTypes.FILTER_RESET };
+    return { type: ActionTypes.RESET_FILTERS };
 }
