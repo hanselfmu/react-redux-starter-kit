@@ -3,7 +3,7 @@
  */
 function Todo({ todo }) {
     return (
-        <li>some item</li>
+        <li>{`${todo.text}: ${todo.status}`}</li>
     )
 }
 

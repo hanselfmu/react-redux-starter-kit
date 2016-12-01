@@ -35,17 +35,12 @@ export const updateTodo = createAction(ActionTypes.UPDATE_TODO, (id, text, statu
 export const deleteTodo = createAction(ActionTypes.DELETE_TODO, id => ({ id }));
 
 export const getTodos = createAction(ActionTypes.GET_TODOS, function() {
-
+    return dispatch => {
+        api.getTodos().then(res => {
+            console.log(res);
+            dispatch(receiveTodos(res));
+        })
+    }
 });
-
-//export const getTodos = function() {
-//    return dispatch => {
-//        dispatch()
-//        api.getTodos().then(res => {
-//            console.log(res);
-//            dispatch(receiveTodos(res));
-//        })
-//    }
-//}
 
 export const receiveTodos = createAction(ActionTypes.RECEIVE_TODOS);

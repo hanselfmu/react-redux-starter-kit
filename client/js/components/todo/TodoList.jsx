@@ -6,7 +6,9 @@ import Todo from './Todo';
 function TodoList({ todoList }) {
     return (
         <ul>
-            {Object.keys(todoList).map(id => Todo(todoList[id]))}
+            {Object.keys(todoList).map(id =>
+                <Todo todo={todoList[id]} />
+            )}
         </ul>
     )
 }

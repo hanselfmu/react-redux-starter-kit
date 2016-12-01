@@ -4,13 +4,14 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
 import { getTodos } from '../actions';
-import AddTodo from '../containers/AddTodo';
+import Header from '../components/common/Header';
+import Footer from '../components/common/Footer';
+import TodoCreator from '../containers/TodoCreator';
 import TodoList from '../components/todo/TodoList';
 
 class TodoApp extends Component {
     componentDidMount() {
-        //const dispatch = this.props.dispatch;
-        //console.log(dispatch(getTodos()));
+        this.props.dispatch(getTodos());
     }
 
     render() {
@@ -18,8 +19,12 @@ class TodoApp extends Component {
 
         return (
             <div>
-                <AddTodo />
-                <TodoList todoList={props.todos}/>
+                <Header />
+                <main>
+                    <TodoCreator />
+                    <TodoList todoList={props.todos} />
+                </main>
+                <Footer />
             </div>
         )
     }
