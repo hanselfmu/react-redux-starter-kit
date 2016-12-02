@@ -3,7 +3,7 @@
  */
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import { getTodos } from '../actions';
+import { getTodos, saveTodos } from '../actions';
 import Header from '../components/common/Header';
 import Footer from '../components/common/Footer';
 import TodoCreator from '../containers/TodoCreator';
@@ -11,7 +11,7 @@ import TodoList from '../components/todo/TodoList';
 
 class TodoApp extends Component {
     componentDidMount() {
-        this.props.dispatch(getTodos());
+        this.props.getTodos();
     }
 
     render() {
@@ -22,7 +22,10 @@ class TodoApp extends Component {
                 <Header />
                 <main>
                     <TodoCreator />
-                    <TodoList todoList={props.todos} />
+                    <TodoList todoList={props.todos.data} />
+                    <div>
+                        <button onClick={() => { props.saveToServer(props.todos) }}>save updates to server</button>
+                    </div>
                 </main>
                 <Footer />
             </div>
@@ -31,7 +34,12 @@ class TodoApp extends Component {
 }
 
 const mapStateToProps = (state) => ({
-    todos: state.todos.data || {}
+    todos: state.todos || {}
 });
 
-export default connect(mapStateToProps)(TodoApp);
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    getTodos: () => { dispatch(getTodos()) },
+    saveToServer: (todos) => { dispatch(saveTodos(todos)) }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);

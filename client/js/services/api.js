@@ -5,25 +5,23 @@ import fetch from 'isomorphic-fetch';
 
 const urlPrefix = '/api/';
 
-const defaultFetchParams = {
-    credentials: 'same-origin',
-    headers: {
-        "Content-Type": 'application/json;charset=utf-8'
-    }
-}
-
-const request = (url, method, body) => fetch(
-    `${urlPrefix}${url}`,
-    {
-        ...defaultFetchParams,
+const request = (url, method, body) => {
+    let params = {
+        credentials: 'same-origin',
+        headers: {
+            "Content-Type": 'application/json;charset=utf-8'
+        },
         method
     }
-)
-    .then(response => response.json())
-    .catch(err => { console.log('error making request') })
+
+    if (body) params.body = JSON.stringify(body);
+
+    return fetch(`${urlPrefix}${url}`, params)
+        .then(response => response.json())
+        .catch(err => { console.log('error making request') })
+}
 
 export default {
-    getTodos() {
-        return request('todos', 'GET')
-    }
+    getTodos: () => request('todos', 'GET'),
+    saveTodos: (todos) => request('todos', 'PUT', todos)
 }

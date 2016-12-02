@@ -86,6 +86,11 @@ Koa, on the other hand, is thriving, but it has a bigger learning curve, which d
 
 # Notes on NPM and package.json
 
+# Notes on CSS & SASS
+## basic rules
+1. use .scss instead of .sass;
+2. use class prefix ".js-" for JS-specific classes when you need to perform JS-related operations (so that functionality and styles are not mixed together);
+
 # Caveats
 1. Don't use Babel plugin "transform-runtime" together with "export * from ...". This will cause a bug in Babel, making the built code un-runnable (basically would not translate "import" anymore).
 And since this plugin is mostly used in a library/tool according to Babel, it it recommended not to use it unless you have a very good reason.

@@ -1,5 +1,4 @@
 {
-  "nextId": 5,
   "data": {
     "0": {
       "text": "item 1",
@@ -12,19 +11,20 @@
       "status": "initial"
     },
     "2": {
-      "text": "item 1",
+      "text": "item 3",
       "id": 2,
       "status": "initial"
     },
     "3": {
-      "text": "item 1",
+      "text": "item 4",
       "id": 3,
       "status": "initial"
     },
     "4": {
-      "text": "item 1",
-      "id": 4,
+      "text": "sdf",
       "status": "initial"
     }
-  }
+  },
+  "size": 5,
+  "nextId": 5
 }

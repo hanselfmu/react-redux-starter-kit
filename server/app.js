@@ -4,6 +4,8 @@
 const express = require('express');
 const app = new express();
 const path = require('path');
+const bodyParser = require('body-parser');
+const multer = require('multer');
 const router = require('./routes')(express.Router());
 
 const port = process.env.PORT || 3000;
@@ -21,6 +23,9 @@ app.get('/assets/*', function(req, res) {
 app.get('/build/*', function(req, res) {
     res.sendFile(path.resolve(__dirname, '../client/build' + req.path));
 });
+
+app.use(bodyParser.json()); // for parsing application/json
+app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
 app.use('/api', router);
 

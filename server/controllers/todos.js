@@ -11,6 +11,7 @@ exports.getTodos = async function(req, res) {
     res.send(await api.getTodos());
 }
 
-exports.addTodo = function(req, res) {
-
+exports.saveTodos = async function(req, res) {
+    console.log(req.body);
+    res.send(await api.saveTodos(req.body));
 }
