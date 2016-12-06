@@ -109,6 +109,11 @@ If it is logic about how things should interact, or side-effects, it should prob
 1. We use webpack 1.13 for now;
 2. We watch closely on webpack 2 and its release date, which has its documentations at https://webpack.js.org/. It provides many useful tools compared to Webpack 1.13, including tree shaking and native ES6 import/export.
 
+# Advanced topics
+
+## Code splitting with webpack and Redux
+https://medium.com/@ryanflorence/welcome-to-future-of-web-application-delivery-9750b7564d9f
+
 # Notes on Backend
 This is not a backend-focused starter kit, and this backend layer is very thin -- hardly any business logic, mostly just a communication layer between the real backend on a Java Tomcat server and the pure frontend.
 In another word, we don't have a full-fledged backend architecture here.

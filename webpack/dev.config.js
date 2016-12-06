@@ -15,6 +15,7 @@ module.exports = {
     entry: ['./client/js/app.js'],
     output: {
         path: assetsPath,
+        publicPath: 'build/',
         filename: '[name].js'  // in the form of "application-9328472034.js"
     },
     externals: {
@@ -36,14 +37,25 @@ module.exports = {
             }
         ]
     },
-    progress: true,
     resolve: {
-        modulesDirectories: [
-            'js/src',
-            'node_modules'
-        ],
-        extensions: ['', '.json', '.js', '.jsx']
+        //modulesDirectories: [
+        //    'js/src',
+        //    'node_modules'
+        //],
+        extensions: ['.json', '.js', '.jsx']
     },
     plugins: [
-    ]
+    ],
+    target: "web",
+    stats: {
+        assets: true,
+        chunks: true,
+        errors: true,
+        errorDetails: true,
+        hash: true,
+        modules: true,
+        timings: true,
+        version: true,
+        warnings: true
+    }
 };
