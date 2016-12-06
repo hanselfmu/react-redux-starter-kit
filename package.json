@@ -1,7 +1,7 @@
 {
   "name": "react-redux-starter-kit",
   "version": "0.2.0",
-  "description": "React + Redux starter kit for front-end, including simple backend structure.",
+  "description": "React + Redux starter kit for frontend, including simple backend structure.",
   "main": "server.js",
   "engines": {
     "node": ">=6.0.0"

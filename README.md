@@ -1,4 +1,40 @@
-This is a starter kit for simple frontend projects with React and Redux. It also comes with simple promise-based API structure, and optional Express/Koa as backend.
+# Starter Kit for React and Redux
+
+*This is a starter kit for simple frontend projects with React and Redux. It also comes with simple promise-based API structure, and Node.js as a thin backend.*
+
+## Table of Contents
+
+  1. [Usage](#usage)
+    - [Setup](#rule-declaration)
+    - [Watch, Run, and Build](#selectors)
+  1. [Frontend Notes](#frontend)
+    - [Architecture](#architecture)
+    - [React](#react)
+    - [Redux](#redux)
+    - [ES2015](#es2015)
+    - [General Javascript](#general-javacript)
+    - [CSS and Sass](#css-and-sass)
+  1. [Backend Notes](#backend)
+    - [Architecture](#architecture)
+    - [Node Express](#node-express)
+  
+## Usage
+
+Clone or download the repository first.
+
+### Setup
+
+This starter kit needs a Node server that is >= v6.0.0.
+
+```bash
+npm install
+```
+
+## Watch both frontend and backend
+
+```bash
+npm run watch
+```
 
 This starter kit has some prerequisites and assumptions about the runtime environment of the project:
 1. it needs a Node server on the backend, and the Node version should be no less than v6.0.0 (so that I don't need "use strict" in every function scope);
@@ -26,7 +62,7 @@ In BEM, an application is visually divided into blocks, and then elements to for
 In all these designs above, it is clear that there are 2 layers of categories, from simple to complex, from small to big. Therefore we divide
 our pages into reusable components like headers or nav bars, and components are divided into common elements like buttons and inputs.
 
-"Modules" folder serves more like a utility folder; it does not have relations with page division.
+"Utils" folder serves as a utility folder with mixins and functions; it does not have relations with page division.
 
 Since we are incorporating with React, it's better to map style/components to js/components. Therefore we will have all the components, be it a simple button, or a complex form, inside "components".
  
@@ -90,6 +126,13 @@ Koa, on the other hand, is thriving, but it has a bigger learning curve, which d
 ## basic rules
 1. use .scss instead of .sass;
 2. use class prefix ".js-" for JS-specific classes when you need to perform JS-related operations (so that functionality and styles are not mixed together);
+
+BEM naming convention was considered, but not favorable because it is more complex. The idea is to create a structure likes this:
+- block
+- block—element
+- block—element__modifier
+
+
 
 # Caveats
 1. Don't use Babel plugin "transform-runtime" together with "export * from ...". This will cause a bug in Babel, making the built code un-runnable (basically would not translate "import" anymore).
