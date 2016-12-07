@@ -2,11 +2,12 @@
  * Created by chan on 11/24/16.
  */
 
+import headerStyle from '../../../style/components/common/header.scss';
 import { Link } from 'react-router';
 
 function Header() {
     return (
-        <header>
+        <header className={headerStyle.header}>
             <img src="assets/wusong_logo.png" />
             <nav>
                 <ul>

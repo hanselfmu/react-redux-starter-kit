@@ -10,7 +10,8 @@
                 "imports": ["react", "redbox-react"]
               }
             ]
-        }]
+        }],
+        "transform-decorators-legacy"
       ]
     },
     "production": {

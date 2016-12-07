@@ -9,7 +9,17 @@ import Footer from '../components/common/Footer';
 import TodoCreator from '../containers/TodoCreator';
 import TodoList from '../components/todo/TodoList';
 
-class TodoApp extends Component {
+const mapStateToProps = (state) => ({
+    todos: state.todos || {}
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    getTodos: () => { dispatch(getTodos()) },
+    saveToServer: (todos) => { dispatch(saveTodos(todos)) }
+});
+
+@connect(mapStateToProps, mapDispatchToProps)
+export default class TodoApp extends Component {
     componentDidMount() {
         this.props.getTodos();
     }
@@ -32,14 +42,3 @@ class TodoApp extends Component {
         )
     }
 }
-
-const mapStateToProps = (state) => ({
-    todos: state.todos || {}
-});
-
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    getTodos: () => { dispatch(getTodos()) },
-    saveToServer: (todos) => { dispatch(saveTodos(todos)) }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(TodoApp);

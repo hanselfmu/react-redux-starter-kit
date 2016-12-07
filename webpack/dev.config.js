@@ -30,18 +30,47 @@ module.exports = {
                 //loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']
                 loader: 'babel-loader'
             },
+            //{
+            //    test: /\.scss$/,
+            //    loader: ExtractTextPlugin.extract("style", "css!sass?includePaths[]=" +
+            //        path.resolve(__dirname, "./css/pages/"))
+            //}
             {
                 test: /\.scss$/,
-                loader: ExtractTextPlugin.extract("style", "css!sass?includePaths[]=" +
-                    path.resolve(__dirname, "./css/pages/"))
-            }
+                loaders: [
+                    {
+                        loader: 'style-loader',
+                        query: {
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: 'css-loader',
+                        query: {
+                            modules: true,
+                            importLoaders: 1,
+                            localIdentName: 'c__[name]__[local]___[hash:base64:5]'  // 'c' prefix means component
+                        }
+                    },
+                    {
+                        loader: 'sass-loader',
+                        query: {
+                            sourceMap: true
+                        }
+                    }
+                ]
+            },
+            //{
+            //    test: /\.scss$/,
+            //    loaders: [
+            //        'style-loader?sourceMap',
+            //        'css-loader?modules&importLoaders=1&localIdentName=[path]__[name]__[local]___[hash:base64:5]',
+            //        'sass-loader?sourceMap'
+            //    ]
+            //}
         ]
     },
     resolve: {
-        //modulesDirectories: [
-        //    'js/src',
-        //    'node_modules'
-        //],
         extensions: ['.json', '.js', '.jsx']
     },
     plugins: [

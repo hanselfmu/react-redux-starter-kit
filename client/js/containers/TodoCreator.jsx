@@ -5,7 +5,8 @@ import { Component }  from 'react';
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 
-class TodoCreator extends Component {
+@connect()
+export default class TodoCreator extends Component {
     constructor(props) {
         super(props);
 
@@ -31,4 +32,3 @@ class TodoCreator extends Component {
     }
 }
 
-export default connect()(TodoCreator);

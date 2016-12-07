@@ -1,6 +1,6 @@
 {
   "verbose": true,
-  "ignore": ["client/**", "server/data/*.json"],
+  "ignore": ["client/**", "**/*.json", "**/*.md"],
   "delay": "2000",
   "execMap": {
     "js": "babel-node"

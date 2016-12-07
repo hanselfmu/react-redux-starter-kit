@@ -106,13 +106,27 @@ If it is logic about how things should interact, or side-effects, it should prob
 2. We choose traditional "Rails-style" app structure over "Domain-style", because we are more familiar with rails-style, which are also common in backend structures. We will try out domain-style as soon as we have the opportunity.
 
 # Notes on Webpack
-1. We use webpack 1.13 for now;
-2. We watch closely on webpack 2 and its release date, which has its documentations at https://webpack.js.org/. It provides many useful tools compared to Webpack 1.13, including tree shaking and native ES6 import/export.
+1. We use webpack 2 now, which has its documentations at https://webpack.js.org/. It provides many useful tools compared to Webpack 1.13, including tree shaking and native ES6 import/export.
 
 # Advanced topics
 
 ## Code splitting with webpack and Redux
 https://medium.com/@ryanflorence/welcome-to-future-of-web-application-delivery-9750b7564d9f
+
+Imagine a SPA with 3 views: TodoApp, About, Settings. The ideal way for the client to use this SPA would be:
+1. user visits "http://mysite.io/todoapp" from browser;
+2. browser gets "main.js", "main.css", "todoapp.js", and "todoapp.css"; first two of these resources would be shared across views/pages; the last two are view/page-specific;
+3. user navigates to "http://mysite.io/about";
+4. browser gets "about.js" and "about.css".
+
+You get the idea.
+
+For css with React, there are a few ways to do it, including:
+1. use them inline;
+2. import/require css into React, and later a <style> tag would be appended to the html *after JS is loaded*;
+3. import/require css into React, and extract css into a different file, load it on demand together with JS *in parallel*.
+
+We will use the 3rd option, although it requires more configuration to get it right.
 
 # Notes on Backend
 This is not a backend-focused starter kit, and this backend layer is very thin -- hardly any business logic, mostly just a communication layer between the real backend on a Java Tomcat server and the pure frontend.
@@ -142,7 +156,9 @@ BEM naming convention was considered, but not favorable because it is more compl
 # Caveats
 1. Don't use Babel plugin "transform-runtime" together with "export * from ...". This will cause a bug in Babel, making the built code un-runnable (basically would not translate "import" anymore).
 And since this plugin is mostly used in a library/tool according to Babel, it it recommended not to use it unless you have a very good reason.
-
+2. Watch out for Webpack 2.* updates, and when it will transition into an official release (we are using beta now);
+3. Watch out for Babel 6's support of decorator syntax; we are now using a legacy plugin from Babel 5.
+4. IE9 imposes the infamous stylesheet limits (https://blogs.msdn.microsoft.com/ieinternals/2011/05/14/stylesheet-limits-in-internet-explorer/); use code splitting with styles cautiously if you are accomodating IE9 (why?).
 
 # What this starter kit has, and does not have
 To better illustrate a proposed frontend app architecture with a layer of Node server, we use a traditional TodoMVC example. Check out http://todomvc.com/ for more information.
