@@ -141,17 +141,34 @@ Koa, on the other hand, is thriving, but it has a bigger learning curve, which d
 
 # Notes on NPM and package.json
 
-# Notes on CSS & SASS
+# Notes on CSS
+
+We use PostCSS together with Sass.
+
+The good things about PostCSS:
+1. PostCSS embraces CSS4, and its plugin mechanism means we can get only what we need and nothing else (more flexibility);
+2. PostCSS have been accepted and adopted by some major companies according to its documentation;
+3. PostCSS is modular, much faster, and much more powerful.
+
+The reason we still stick with Sass right now:
+1. it is easier to learn and use: considering the fact that this starter kit already brings on a lot of new stuff, we try to keep the learning curve down;
+2. it does not have as big a community as Sass;
+3. the plugin mechanism, just like Babel, means that now that developers does not only need to learn a tool, they need to learn many "plugins" that come with the tool, i.e. the notorious .*rc file.
+
+We will slowly transition to PostCSS in the future.
+
+"Preprocessors saved us from CSS. CSS will save us from preprocessors.".
+
 ## basic rules
-1. use .scss instead of .sass;
-2. use class prefix ".js-" for JS-specific classes when you need to perform JS-related operations (so that functionality and styles are not mixed together);
+1. use class prefix ".js-" for JS-specific classes when you need to perform JS-related operations (so that functionality and styles are not mixed together);
+2. use ".scss" syntax instead of ".sass";
 
 BEM naming convention was considered, but not favorable because it is more complex. The idea is to create a structure likes this:
 - block
 - block—element
 - block—element__modifier
 
-
+PostCSS has been integrated into Webpack.
 
 # Caveats
 1. Don't use Babel plugin "transform-runtime" together with "export * from ...". This will cause a bug in Babel, making the built code un-runnable (basically would not translate "import" anymore).

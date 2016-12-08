@@ -1,6 +1,20 @@
+@import "../../common";
+
 .header {
-  * {
-    display: inline-block;
-    width: 300px;
+  display: flex;
+  flex-direction: row;
+
+  background-color: $color-primary-base;
+
+  .logo {
+    flex: 0 0 200px;
+  }
+
+  .nav {
+    flex: 1;
+  }
+
+  .nav-item {
+
   }
 }

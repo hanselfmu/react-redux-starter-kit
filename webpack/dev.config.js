@@ -16,25 +16,19 @@ module.exports = {
     output: {
         path: assetsPath,
         publicPath: 'build/',
-        filename: '[name].js'  // in the form of "application-9328472034.js"
+        filename: '[name].js'
     },
     externals: {
         "react": "React",
-        "react-dom": "ReactDOM"    // lol this is the trickiest thing I've seen in Webpack
+        "react-dom": "ReactDOM"
     },
     module: {
         loaders: [
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                //loaders: ['babel?' + JSON.stringify(babelLoaderQuery), 'eslint-loader']
                 loader: 'babel-loader'
             },
-            //{
-            //    test: /\.scss$/,
-            //    loader: ExtractTextPlugin.extract("style", "css!sass?includePaths[]=" +
-            //        path.resolve(__dirname, "./css/pages/"))
-            //}
             {
                 test: /\.scss$/,
                 loaders: [
@@ -49,25 +43,19 @@ module.exports = {
                         query: {
                             modules: true,
                             importLoaders: 1,
+                            camelCase: true,
                             localIdentName: 'c__[name]__[local]___[hash:base64:5]'  // 'c' prefix means component
                         }
                     },
                     {
-                        loader: 'sass-loader',
-                        query: {
-                            sourceMap: true
-                        }
+                        loader: 'sass-loader'
+                    },
+                    {
+                        loader: 'postcss-loader'
                     }
                 ]
-            },
-            //{
-            //    test: /\.scss$/,
-            //    loaders: [
-            //        'style-loader?sourceMap',
-            //        'css-loader?modules&importLoaders=1&localIdentName=[path]__[name]__[local]___[hash:base64:5]',
-            //        'sass-loader?sourceMap'
-            //    ]
-            //}
+
+            }
         ]
     },
     resolve: {

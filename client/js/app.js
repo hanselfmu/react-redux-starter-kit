@@ -16,6 +16,8 @@ import rootReducer from './reducers';
 import { getTodos } from './actions';
 import { routes } from './services/routing';
 
+import styles from '../style/main.scss';
+
 const middleware = process.env.NODE_ENV === 'production' ? [ fsaThunk, thunk ] : [ fsaThunk, thunk, logger() ];
 const store = createStore(
     rootReducer,

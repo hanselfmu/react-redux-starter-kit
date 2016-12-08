@@ -8,7 +8,7 @@ import { Link } from 'react-router';
 function Header() {
     return (
         <header className={headerStyle.header}>
-            <img src="assets/wusong_logo.png" />
+            <img className={headerStyle.headerIcon} src="assets/wusong_logo.png" />
             <nav>
                 <ul>
                     <li><Link to="/">Todo App</Link></li>
