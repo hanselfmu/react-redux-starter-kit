@@ -4,47 +4,92 @@
 
 ## Table of Contents
 
-  1. [Usage](#usage)
-    - [Setup](#rule-declaration)
-    - [Watch, Run, and Build](#selectors)
-  1. [Frontend Notes](#frontend)
-    - [Architecture](#architecture)
+  1. [Usage](#Usage)
+    - [Setup](#setup)
+    - [Watch](#watch)
+    - [Build](#build)
+  1. [Frontend Notes](#frontend-notes)
+    - [Basic Architecture](#basic-architecture)
     - [React](#react)
     - [Redux](#redux)
     - [ES2015](#es2015)
     - [General Javascript](#general-javacript)
     - [CSS and Sass](#css-and-sass)
-  1. [Backend Notes](#backend)
+  1. [Backend Notes](#backend-notes)
     - [Architecture](#architecture)
     - [Node Express](#node-express)
-  
+
 ## Usage
 
-Clone or download the repository first.
+This starter kit has some prerequisites:
+1. it needs a Node server that is >=6.0.0 (so that I don't need "use strict" in every function scope and I get many good ES6 features)
+
+There are many tools I have chosen to use or not to use, but by no means it should stop you from using or not using them. Feel free to plug in or take out things.
 
 ### Setup
 
-This starter kit needs a Node server that is >= v6.0.0.
+Currently there are two branches: *master* and *koa*. The difference is that master branch uses Express 4 as the backend server, while koa branch uses (of course) Koa. If you would like a taste of Koa, you can switch to that branch.
 
 ```bash
 npm install
 ```
 
-## Watch both frontend and backend
+### Watch
 
-```bash
+I'm personally not a fan of Webpack's [development server](https://webpack.github.io/docs/webpack-dev-server.html), because I can get what I need from the simple `webpack --watch` and my own customizable Node server.
+
+To watch everything (client and server):
+```
 npm run watch
 ```
+The Node server will automatically start, and this simple TodoApp can be viewed at http://localhost:3000.
 
-This starter kit has some prerequisites and assumptions about the runtime environment of the project:
-1. it needs a Node server on the backend, and the Node version should be no less than v6.0.0 (so that I don't need "use strict" in every function scope);
-2. it assumes that the application sits on HTTPS, and we have HTTP2 enabled.
+To just watch client side or server side, you can:
+```
+# watch frontend
+npm run watch-fe
+# watch backend
+npm run watch-be
+```
 
-This starter kit is somewhat opinionated, meaning that there are certain preferred tools and predefined structures that follow certain standards.
+We use [Webpack 2](https://webpack.js.org/) to watch for client file changes, and [Nodemon](https://nodemon.io/) for server file changes.
 
-The following things are NOT opinionated, or not integral to this kit, thus open for changes with individual project requirements:
-1. routing schemes, including how Node server interacts with React side;
-2. whether it is universal/isomorphic React or not
+### Build
+Similar to watching, to build everything into production:
+```
+npm run build
+```
+
+Then simply start the server with `node server/app.js`.
+
+There are other simple npm scripts for building with development settings, building client or server side separately, or profiling the build.
+
+## Frontend Notes
+*The thought process behind all these frontend choices.*
+
+## Basic Architecture
+
+I use simple code splitting from Webpack to deliver a performance-oriented SPA flow:
+
+![](https://www.lucidchart.com/publicSegments/view/6a315e35-5fa8-4a3e-b2fb-62c331bfc66d/image.png)
+
+To explain more, imagine a SPA with 3 views: TodoApp, About, and Settings. The ideal way for the client to use this SPA would be:
+1. user visits "http://my.site/todoapp" from browser;
+2. browser gets "main.js", "main.css", "todoapp.js", and "todoapp.css"; first two of these resources would be shared across views/pages; the last two are view/page-specific;
+3. user navigates to "http://my.site/about";
+4. browser gets "about.js" and "about.css".
+
+This flow echoes [this awesome post by Ryan Florence](https://medium.com/@ryanflorence/welcome-to-future-of-web-application-delivery-9750b7564d9f).
+
+For css with React, there are a few ways to do it, including:
+1. use them inline;
+2. import/require css into React, and later a \<style\> tag would be appended to the html *after JS is loaded*;
+3. import/require css into React, and extract css into a different file, load it on demand together with JS *in parallel*.
+
+We will use the 3rd option, although it requires more configuration to get it right.
+
+
+## ES2015
 
 # Project Structure Notes
 1. Traditionally backend-focused (i.e. Node Express) starter kits put frontend code in a folder called "public", and frontend-focused starter kits put backend code in a simple "server.js" file. This starter kit, while putting frontend as its main concern, will try to address the inherent complexity of backend in structure as well. Therefore, we have separate "client" and "server" source folders for each side.
@@ -65,7 +110,7 @@ our pages into reusable components like headers or nav bars, and components are 
 "Utils" folder serves as a utility folder with mixins and functions; it does not have relations with page division.
 
 Since we are incorporating with React, it's better to map style/components to js/components. Therefore we will have all the components, be it a simple button, or a complex form, inside "components".
- 
+
 We use some ES2015 features that are not shipped with Node.js, namely, async functions and such, so we will need separate babel transformations for frontend and backend, thus the separate babelrc files.
 
 # Notes on General Code Styles
@@ -110,24 +155,6 @@ If it is logic about how things should interact, or side-effects, it should prob
 
 # Advanced topics
 
-## Code splitting with webpack and Redux
-https://medium.com/@ryanflorence/welcome-to-future-of-web-application-delivery-9750b7564d9f
-
-Imagine a SPA with 3 views: TodoApp, About, Settings. The ideal way for the client to use this SPA would be:
-1. user visits "http://mysite.io/todoapp" from browser;
-2. browser gets "main.js", "main.css", "todoapp.js", and "todoapp.css"; first two of these resources would be shared across views/pages; the last two are view/page-specific;
-3. user navigates to "http://mysite.io/about";
-4. browser gets "about.js" and "about.css".
-
-You get the idea.
-
-For css with React, there are a few ways to do it, including:
-1. use them inline;
-2. import/require css into React, and later a <style> tag would be appended to the html *after JS is loaded*;
-3. import/require css into React, and extract css into a different file, load it on demand together with JS *in parallel*.
-
-We will use the 3rd option, although it requires more configuration to get it right.
-
 # Notes on Backend
 This is not a backend-focused starter kit, and this backend layer is very thin -- hardly any business logic, mostly just a communication layer between the real backend on a Java Tomcat server and the pure frontend.
 In another word, we don't have a full-fledged backend architecture here.
@@ -153,7 +180,7 @@ The good things about PostCSS:
 The reason we still stick with Sass right now:
 1. it is easier to learn and use: considering the fact that this starter kit already brings on a lot of new stuff, we try to keep the learning curve down;
 2. it does not have as big a community as Sass;
-3. the plugin mechanism, just like Babel, means that now that developers does not only need to learn a tool, they need to learn many "plugins" that come with the tool, i.e. the notorious .*rc file.
+3. the plugin mechanism, just like Babel, means that now that developers does not only need to learn a tool, they need to learn many "plugins" that come with the tool, i.e. the notorious .\*rc file.
 
 We will slowly transition to PostCSS in the future.
 
