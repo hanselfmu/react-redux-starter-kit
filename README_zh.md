@@ -1,53 +1,55 @@
-# 为 React 与 Redux 定做的启动套件
+# React 与 Redux 的启动套件
 
 [English Version](README.md)
 
-*This is a starter kit for simple frontend projects with React and Redux. It also comes with simple promise-based API structure, and Node.js as a thin backend.*
+*这是一个为React和Redux定做的前端项目启动套件。该套件包含了简单的基于Promise的API结构，以及基于Node.js的薄后端。*
 
-## Table of Contents
+## 文档目录
 
-  1. [Usage](#Usage)
-    - [Setup](#setup)
-    - [Watch](#watch)
-    - [Build](#build)
-  1. [Frontend Notes](#frontend-notes)
-    - [Basic Architecture](#basic-architecture)
+  1. [使用方式](#使用方式)
+    - [初始化](#初始化)
+    - [监听](#监听)
+    - [构建](#构建)
+  1. [前端说明](#前端说明)
+    - [基础架构](#基础架构)
     - [React](#react)
     - [Redux](#redux)
-    - [ES2015 and ES7](#es2015-and-es7)
-    - [General Javascript](#general-javacript)
-    - [CSS and Sass](#css-and-sass)
-  1. [Backend Notes](#backend-notes)
+    - [ES2015与ES7](#es2015与es7)
+    - [一般的Javascript](#一般的javacript)
+    - [CSS与Sass](#css与sass)
+  1. [后端说明](#后端说明)
     - [ES2015](#es2015)
-  1. [Caveats](#caveats)
-  1. [What This Starter Kit Has and Has Not](#what-this-starter-kit-has-and-has-not)
+  1. [注意事项](#注意事项)
+  1. [该套件有与没有的](#该套件有于没有的)
 
-## Usage
+## 使用方式
 
-This starter kit has some prerequisites:
-1. it needs a Node server that is >=6.0.0 (so that I don't need "use strict" in every function scope and I get many good ES6 features)
+该启动套件有以下前提条件:
+1. 它需要一个不低于6.0.0版本的Node服务器（这样一来我就不用在每个方程里都写"use strict"了，而且可以获得6.0.0之后的许多ES6语言特性支持）；
 
-There are many tools I have chosen to use or not to use, but by no means it should stop you from using or not using them. Feel free to plug in or take out things.
+在这个套件中，我选择了使用或不使用很多工具，但这并不代表你也需要作出同样的选择。请根据个人喜好或项目需要随意添加或移除各种工具。
 
-### Setup
+### 初始化
 
-Currently there are two branches: *master* and *koa*. The difference is that master branch uses Express 4 as the backend server, while koa branch uses (of course) Koa. If you would like a taste of Koa, you can switch to that branch.
+现在该项目有两个分支：*master*与*koa*。区别在于master分支使用Express 4作为后端应用框架，而koa分支则使用了koa。如果你想体验一下koa，可以切换到koa分支。
+
 
 ```bash
 npm install
 ```
 
-### Watch
+### 监听
 
-I'm personally not a fan of Webpack's [development server](https://webpack.github.io/docs/webpack-dev-server.html), because I can get what I need from the simple `webpack --watch` and my own customizable Node server.
+我个人并不喜欢Webpack提供的[development server](https://webpack.github.io/docs/webpack-dev-server.html), 因为我可以通过简单的 `webpack --watch` 和完全自主控制的Node服务器获得我想要的。
 
-To watch everything (client and server):
+同时监听并实时更新前端与后端:
 ```
 npm run watch
 ```
-The Node server will automatically start, and this simple TodoApp can be viewed at http://localhost:3000.
 
-To just watch client side or server side, you can:
+Node服务器会自动启动，示例的TodoApp也可以在 http://localhost:3000 浏览。
+
+如果只想单独监听前端或后端：
 ```
 # watch frontend
 npm run watch-fe
@@ -55,64 +57,64 @@ npm run watch-fe
 npm run watch-be
 ```
 
-We use [Webpack 2](https://webpack.js.org/) to watch for client file changes, and [Nodemon](https://nodemon.io/) for server file changes.
+该套件使用[Webpack 2](https://webpack.js.org/)来监听前端文件的更新, 使用[Nodemon](https://nodemon.io/)来监听后端文件的更新。
 
-### Build
-Similar to watching, to build everything into production:
+### 构建
+与监听类似，使用下面的命令来构建前端与后端：
 ```
 npm run build
 ```
 
-Then simply start the server with `node server/app.js`.
+然后通过`node server/app.js`来启动服务器。
 
-There are other simple npm scripts for building with development settings, building client or server side separately, or profiling the build.
+还有其他简单的npm scripts用来为开发环境构建，单独构建前端或后端，或对构建进行性能分析。
 
-## Frontend Notes
-*The thought process behind all these frontend choices.*
+## 前端说明
+*作出这些关于前端的种种选择的想法。*
 
-### Basic Architecture
+### 基础架构
 
-I use simple code splitting from Webpack to deliver a performance-oriented SPA flow:
+我使用了Webpack提供的简单的代码分割来实现一个优化了性能的单页应用：
 
 ![](https://www.lucidchart.com/publicSegments/view/6a315e35-5fa8-4a3e-b2fb-62c331bfc66d/image.png)
 
-To explain more, imagine a SPA with 3 views: TodoApp, About, and Settings. The ideal way for the client to use this SPA would be:
+为了更好的解释，假设该应用有三个页面：TodoApp，About，以及Settings。理想情况下，用户访问该单页应用应该是这样的：
 
-1. user visits "http://my.site/todoapp" from browser;
-2. browser gets "main.js", "main.css", "todoapp.js", and "todoapp.css"; first two of these resources would be shared across views/pages; the last two are view/page-specific;
-3. user navigates to "http://my.site/about";
-4. browser gets "about.js" and "about.css".
+1. 用户通过浏览器访问"http://my.site/todoapp";
+2. 浏览器请求获得"main.js", "main.css", "todoapp.js", and "todoapp.css"这些资源; 前两者是所有页面公用的资源; 后两者专门服务于TodoApp页面;
+3. 用户导航至"http://my.site/about";
+4. 浏览器请求获得"about.js"与"about.css"。
 
-This flow echoes [this awesome post by Ryan Florence](https://medium.com/@ryanflorence/welcome-to-future-of-web-application-delivery-9750b7564d9f), and many other similar ideas. Basically, users shouldn't load resources they don't need; they only need to load what is necessary right now.
+这套简单的流程与[这篇文章](https://medium.com/@ryanflorence/welcome-to-future-of-web-application-delivery-9750b7564d9f)以及其他许多有关单页应用优化的文章的思想一样。基本地来说，用户只需要请求当前页面需要的资源，而不是该单页应用包含的所有资源。
 
-In a more complex app, common resources might come from different CDNs (one for images, one for js, and such), and usually the single common JS bundle *main.js* will be broken into different pieces, like *util.js*, *user-tracking.js*, *events.js*, to optimize cache performance and modularity. This starter kit does not intend to cover these cases or how to optimize for them. As your app grows, the solution will find itself :).
+在一个更复杂的应用中，前端的公共资源也许会来自于不同的CDN（专门服务于图片的CDN，专门服务于JS的CDN等等），单一的公共JS打包文件 *main.js* 会被进一步分解成为独立的组件，比如 *util.js*，*user-tracking.js*，*events.js*，从而优化缓存性能，并进一步模块化。该套件并不会针对这种复杂的应用作出处理。当你的应用增长到这种复杂程度时，你应该早已不需要什么启动套件了。
 
 ### React
 
-React itself is quite simple. There are not many choices to make, and the few choices you have to make present their tradeoffs clearly. This starter kit only has the following preferences for React, and feel free to remove any or all of them from .eslintrc:
+React本身是十分简单的。使用React不需要做太多选择，而仅有的一些选择也会把优劣展示得很清楚。该套件针对React仅有以下几点偏好，请随意在.eslintrc中添加或删减：
 
-If you are concerned with React's performance, look at [React's guide for optimization](https://facebook.github.io/react/docs/optimizing-performance.html), and also look at the notes for React's [reconciliation algorithm](https://facebook.github.io/react/docs/reconciliation.html) (look for "Tradeoffs"). Keep in mind that if you use Redux and its [connect()](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) function, chances are you don't have to optimize `shouldComponentUpdate()` yourself.
+如果你关心你的React组件的性能, 请参考[React's guide for optimization](https://facebook.github.io/react/docs/optimizing-performance.html), 也可以参考React的[reconciliation algorithm](https://facebook.github.io/react/docs/reconciliation.html) (重点在"Tradeoffs")。值得注意的是，如果你使用了Redux以及它的 [connect()](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)方程, 可能你已经不需要手动优化`shouldComponentUpdate()`了。
 
-#### CSS with React
-For css with React, there are a few ways to do it, including:
+#### CSS和React
+CSS与React结合有多种方案，包括：
 
-1. use Javascript to create inline component-specific styles;
-2. import separate css modules into React, and use them in the component; these styles can be loaded on demand together with components or pages;
-3. write css completely separately and independent of React components.
+1. 使用Javascript创建行内的仅限于组件的样式;
+2. 在React组件中引入单独的css模块并使用它们; 在React组件加载时，这些样式也会被按需加载进来;
+3. 写与React组件在文件结构上完全分离的css样式。
 
-As you can see, these options are listed in a order from the most coupling with components to the least coupling, and from the most setup to the least setup. There are pros and cons to all these options, and I will use the **2nd** option here because it provides more balance.
+可以看出来，以上三种方案是按照样式与组件最耦合至最不耦合，以及需要更多准备工作至更少准备工作这个顺序排的。这三种方案都各有优劣，而该套件选取的是第二种，因为它在两端之间有一定的平衡。
 
-To me, writing css with Javascript does give more flexibility, and it conforms with the idea of keeping styles local instead of global. So I will keep trying out the 1st option, and I will integrate it into the kit when I feel it works much better than the 2nd option.
+对我来说，使用Javascript写css样式的确会提供更多的灵活性，而且完全写在React组件中的样式也会使组件样式本地化，不会污染到全局的样式。我会继续尝试使用Javascript书写css样式，当我觉得它明显比第二种方案好的时候，我会把它融入到该套件中。
 
 ### Redux
 
-Before you dive into this section, read this post [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367) from Dan Abramov, Redux's creator. Trust me, I didn't read it thoroughly when I started using Redux in a somewhat complex app, and **I paid the price**. The key thing to remember is: *local state is fine*. In fact, probably the most asked question when I'm developing my apps using Redux is this:
+在你开始阅读此部分之前，请详读Redux作者Dan Abramov的这篇文章：[You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)。我个人因为在初次接触Redux时没有细读这篇文章，吃了一些亏。这篇文章中最关键的一点是：*组件本地维护、使用state是完全没问题的*. 事实上，我在使用Redux开发应用时，问（自己）的最多的问题应该是：
 
-*Is this new component truly self-containing?*
+*我要写的这个新的组件是自我包含的吗？*
 
-In other words, does this new component's state interact with other components? Should I elevate it to a global state and let Redux handle it?
+换句话说，这个新组建的state会影响其他组件吗？我需不需要把它的state交给Redux来管理？
 
-#### File Structure
+#### 文件结构
 1. I use a "pages" folder to keep distinct pages, like About page, Settings page, Login/Register page, and one or more App pages. They are essentially just Redux containers.
 2. I choose traditional "Rails-style" app structure over "Domain-style", because people are more familiar with rails-style, which is also common in backend structures. Worth noticing is that in "actions" and "reducers" folder, I have an "index.js" file to combine every action files and reducer files together. "action/index.js" looks just like this:
 ```
