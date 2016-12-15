@@ -1,6 +1,6 @@
-# Starter Kit for React and Redux
+# 为 React 与 Redux 定做的启动套件
 
-[中文版说明文档](README_zh.md)
+[English Version](README.md)
 
 *This is a starter kit for simple frontend projects with React and Redux. It also comes with simple promise-based API structure, and Node.js as a thin backend.*
 
