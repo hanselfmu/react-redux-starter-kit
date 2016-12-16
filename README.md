@@ -18,7 +18,7 @@
     - [General Javascript](#general-javacript)
     - [CSS and Sass](#css-and-sass)
   1. [Backend Notes](#backend-notes)
-    - [ES2015](#es2015)
+    - [Separate Babels](#separate-babels)
   1. [Caveats](#caveats)
   1. [What This Starter Kit Has and Has Not](#what-this-starter-kit-has-and-has-not)
 
@@ -114,7 +114,7 @@ In other words, does this new component's state interact with other components? 
 
 #### File Structure
 1. I use a "pages" folder to keep distinct pages, like About page, Settings page, Login/Register page, and one or more App pages. They are essentially just Redux containers.
-2. I choose traditional "Rails-style" app structure over "Domain-style", because people are more familiar with rails-style, which is also common in backend structures. Worth noticing is that in "actions" and "reducers" folder, I have an "index.js" file to combine every action files and reducer files together. "action/index.js" looks just like this:
+2. I choose traditional "Rails-style" app structure over "Domain-style", because it is flatter, and simpler to understand when the app is not so complex. Worth noticing is that in "actions" and "reducers" folder, I have an "index.js" file to combine every action files and reducer files together. "action/index.js" looks just like this:
 ```
 // using ES6 modules
 export * from './todos';
@@ -129,7 +129,7 @@ Components are structured in a "Domain-style" fashion.
 
 There is also a "middleware" folder specifically for Redux middleware. You can customize Redux by adding more middleware. I've included one simple middleware: *reduxFSAThunk.js*; feel free to add more.
 
-#### Actions and reducers
+#### Actions and Reducers
 
 In terms of where should business logic go, I don't prefer either fat-action-thin-reducer style, or thin-action-fat-reducer style. Instead, I try to find the balance between actions and reducers.
 If it is logic about how things should interact, or side-effects, it should probably go into actions; if it is data logic, i.e. how data composes and decomposes, it should probably go into reducers.
@@ -145,23 +145,23 @@ Also, check out [redux-saga](https://github.com/yelouafi/redux-saga); I will cre
 
 #### Routing
 
-In terms of routing, React-Router will work with Redux just fine in many simple cases, but when we need to update components based on route changes or take actions on url parameters, it is recommended that we use either react-router-redux or redux-router.
+In terms of routing, React-Router will work with Redux just fine in many simple cases, but when you need to update components based on route changes or take actions on url parameters, it is recommended that you use either react-router-redux or redux-router.
 The differences between these two bindings are nicely explained here:
 https://github.com/acdlite/redux-router#differences-with-react-router-redux
 
-We will use react-router-redux by default, but feel free to exclude it, or use redux-router if it fits your needs.
+This kit uses react-router-redux by default, but feel free to exclude it, or use redux-router if it fits your needs.
 
 ### ES2015 and ES7
 
 #### Module system
 
-We use and prefer ES2015 modules, with named imports, exports, and export default. The difference, and the advantage over CommonJS, is that CommonJS does not support named exports by itself. module.exports in CJS is a single value, and does not provide much flexibility as ES2015's module system.
+I use and prefer ES2015 modules, with named imports, exports, and export default. The difference, and the advantage over CommonJS, is that ES2015 uses a static module system, meaning you can statically analyze dependencies without running the code. Also, module.exports in CJS is a single value, and does not provide much flexibility as ES2015's module system.
 For interoperability between ES2015 and CJS, check out the following link for reference:
 https://github.com/nodejs/node-eps/blob/master/002-es6-modules.md#54-es-consuming-commonjs
 
 ### Webpack
 
-We use webpack 2 now, which has its documentations at https://webpack.js.org/. It provides many useful tools compared to Webpack 1.13, including tree shaking and native ES6 import/export.
+This kit uses webpack 2 now, which has its documentations at https://webpack.js.org/. It provides many useful tools compared to Webpack 1.13, including tree shaking and native ES6 import/export.
 
 #### Tree Shaking
 
@@ -169,7 +169,7 @@ It's a nice little feature already present in other module bundlers like [Rollup
 
 #### Native ES6 modules
 
-Specifically, it supports `System.import`, which is ES6 module's way of importing a module asynchronously. Webpack 2 is smart enough to understand ES6 modules and use JSONP (if your webpack config's target is "web") to load resources on demand. Combine this with React-Router, you get simple on-demand resource loading. Check out "client/app/services/routing.js" for more information.
+Specifically, it supports `System.import`, which is ES6 module's way of importing a module asynchronously. Webpack 2 is smart enough to understand ES6 modules and use JSONP (if your webpack config's target is "web") to load resources on demand. Combine this with React-Router, you get simple on-demand resource loading. Check out [this simple routing service file](client/js/services/routing.js) for more information.
 
 ### General Javascript
 When in doubt, I try to stick to Airbnb's style guides as close as possible.
@@ -195,11 +195,11 @@ There are several different design patterns in terms of style folder structure, 
     3. http://timhartmann.net/frontend-development/scss-styleguide-with-bem-oocss-smacss/
     4. http://thesassway.com/beginner/how-to-structure-a-sass-project
 
-and I personally prefer the architecture from scotch.io. It is enough to handle a complex SPA, yet still simple enough to be understandable. What you see right now is a derived version from that. "base", "elements", and "utils" are global Sass modules that get compiled into "\_common.scss" module. This common module defines Sass mixins and global Sass variables, and all the component-level stylesheets (components, pages, etc.) import this module to use globally defined variables and utilities. We also have a "main.scss" that defines global styles.
+and I personally prefer the architecture from scotch.io, which is borrowed from [the 7-1 pattern](https://sass-guidelin.es/#the-7-1-pattern). It is enough to handle a complex SPA, yet still simple enough to be understandable. What you see right now is a derived version from that. "base", "elements", and "utils" are global Sass modules that get compiled into "\_common.scss" module. This common module defines Sass mixins and global Sass variables, and all the component-level stylesheets (components, pages, etc.) import this module to use globally defined variables and utilities. We also have a "main.scss" that defines global styles.
 
 #### Preprocessors or PostCSS?
 
-We use PostCSS together with Sass.
+I use PostCSS together with Sass.
 
 The good things about PostCSS:
 1. PostCSS embraces CSS4, and its plugin mechanism means we can get only what we need and nothing else (more flexibility);
@@ -207,7 +207,7 @@ The good things about PostCSS:
 3. PostCSS is modular, much faster, and much more powerful.
 
 The reason we still stick with Sass right now:
-1. it is easier to learn and use: considering the fact that this starter kit already brings on a lot of new stuff, we try to keep the learning curve down;
+1. it is easier to learn and use: considering the fact that this starter kit already brings on a lot of new stuff, I try to keep the learning curve down;
 2. it does not have as big a community as Sass;
 3. the plugin mechanism, just like Babel, means that now that developers does not only need to learn a tool, they need to learn many "plugins" that come with the tool, i.e. the notorious .\*rc file.
 
@@ -229,14 +229,14 @@ So this kit provides a basic setup for mocking APIs, as well as a very simple DB
 I choose Express as the primary choice, but you can find Koa-supported backend on branch "koa". The reasoning behind this is simple: Express is more mature, with more support, and more tutorials on edgy use cases.
 Koa, on the other hand, is thriving, but it has a bigger learning curve, which does not come easy for developers focusing more on pure frontend tech stack.
 
-### ES2015
+### Separate Babels
 
-We use some ES2015 features that are not shipped with Node.js, namely, async functions and such, so we will need separate babel transformations for frontend and backend, thus the separate babelrc files.
+This kit uses some ES7 features that are not shipped with Node.js, namely, async functions and such, so we will need separate babel transformations for frontend and backend, thus the separate babelrc files.
 
 ## Caveats
-1. Don't use Babel plugin "transform-runtime" together with "export * from ...". This will cause a bug in Babel, making the built code un-runnable (basically would not translate "import" anymore).
+1. Don't use Babel plugin [transform-runtime](http://babeljs.io/docs/plugins/transform-runtime/) together with `export * from ...`. This will cause a bug in Babel, making the built code un-runnable (basically would not translate "import" anymore).
 And since this plugin is mostly used in a library/tool according to Babel, it it recommended not to use it unless you have a very good reason.
-2. Watch out for Webpack 2.* updates, and when it will transition into an official release (we are using beta now);
+2. Watch out for Webpack 2.* updates, and when it will transition into an official release (we are using beta now, though it's kind of stable now);
 3. Watch out for Babel 6's support of decorator syntax; we are now using a legacy plugin from Babel 5.
 4. IE9 imposes the infamous stylesheet limits (https://blogs.msdn.microsoft.com/ieinternals/2011/05/14/stylesheet-limits-in-internet-explorer/); use code splitting with styles cautiously if you are accommodating IE9 (why?).
 

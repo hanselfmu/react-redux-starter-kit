@@ -1,8 +1,10 @@
 /**
  * Created by chan on 12/6/16.
+ *
+ * Heavily borrowed from https://github.com/ModusCreateOrg/react-dynamic-route-loading-es6
  */
 const onErrorLoading = (err) => {
-    console.error('Dynamic page loading failed', err);
+    console.error('loading failed', err);
 }
 
 const loadRoute = (cb) => (module) => cb(null, module.default);
