@@ -15,12 +15,12 @@ const httpRequest = (options) => {
 
         case 'get':
             return wrap(async function() {
-                return await fs.readFile(path.resolve(__dirname, '../data/', options.url), 'utf8');
+                return await fs.readFile(path.resolve(__dirname, '../../data/', options.url), 'utf8');
             });
 
         case 'put':
             return wrap(async function(payload) {
-                return await fs.writeFile(path.resolve(__dirname, '../data/', options.url), JSON.stringify(payload), 'utf8');
+                return await fs.writeFile(path.resolve(__dirname, '../../data/', options.url), JSON.stringify(payload), 'utf8');
             });
 
         default:

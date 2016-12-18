@@ -1,8 +1,5 @@
 /**
  * Created by chan on 11/16/16.
- */
-/**
- * Created by chan on 11/16/16.
  *
  * Webpack config for development
  */
@@ -10,12 +7,13 @@ var fs = require('fs');
 var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var assetsPath = path.resolve(__dirname, '../client/build');
+var ReplaceAssetsPlugin = require('./plugins/ReplaceAssetsPlugin');
+var assetsPath = path.resolve(__dirname, '../build');
 
 module.exports = {
     devtool: 'inline-source-map',
     context: path.resolve(__dirname, '..'),
-    entry: ['./client/js/app.js'],
+    entry: ['./js/app.js'],
     output: {
         path: assetsPath,
         publicPath: 'build/',
@@ -65,6 +63,16 @@ module.exports = {
         extensions: ['.json', '.js', '.jsx']
     },
     plugins: [
+        new webpack.optimize.MinChunkSizePlugin({
+            minChunkSize: 1000      // anything less than 1KB will be combined;
+        }),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new ReplaceAssetsPlugin({
+            replace: 'false',
+            entries: ['main'],
+            input: './app.html',
+            output: './build/app.html'
+        })
     ],
     target: "web",
     stats: {

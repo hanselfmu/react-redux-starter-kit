@@ -15,10 +15,10 @@
     - [React](#react)
     - [Redux](#redux)
     - [ES2015与ES7](#es2015与es7)
-    - [基本的Javascript](#基本的Javascript)
+    - [基本的Javascript](#基本的javascript)
     - [CSS与Sass](#css与sass)
   1. [后端说明](#后端说明)
-    - [各自的Babel文件](#各自的Babel文件)
+    - [各自的Babel文件](#各自的babel文件)
   1. [注意事项](#注意事项)
   1. [该套件有与没有的](#该套件有与没有的)
 

@@ -1,24 +1,26 @@
 {
   "name": "react-redux-starter-kit",
   "version": "0.2.0",
-  "description": "React + Redux starter kit for frontend, including simple backend structure.",
+  "description": "React + Redux starter kit for frontend, including a simple backend structure.",
   "main": "server.js",
   "engines": {
     "node": ">=6.0.0"
   },
   "scripts": {
+    "start": "node server/bin/app.js",
     "watch": "npm run watch-fe & npm run watch-be",
     "build-dev": "npm run build-fe-dev & npm run build-be-dev",
-    "build-prod": "",
-    "watch-fe": "npm run clean-fe && webpack --watch --config webpack/dev.config.js",
-    "build-fe-dev": "webpack --config webpack/dev.config.js",
-    "build-fe-prod": "rm -rf ./build/* && webpack --verbose --colors --display-error-details --config webpack/prod.config.js",
-    "build-fe-profiling": "webpack --verbose --colors --profiles --display-modules --display-error-details --config webpack/prod.config.js",
+    "build-prod": "npm run build-fe-prod & npm run build-be-prod",
+    "watch-fe": "npm run clean-fe && webpack --watch --config client/webpack/dev.config.js",
+    "build-fe-dev": "npm run clean-fe && webpack --config client/webpack/dev.config.js",
+    "build-fe-prod": "npm run clean-fe && webpack --config client/webpack/prod.config.js",
+    "build-fe-profiling": "webpack --verbose --colors --profiles --display-modules --display-error-details --config client/webpack/prod.config.js",
     "clean-fe": "rm -rf ./client/build/*",
-    "watch-be": "nodemon server/app.js --config server/nodemon.json",
-    "build-be-dev": "",
-    "build-be-prod": "",
-    "lint": "eslint -c .eslintrc js/app"
+    "watch-be": "nodemon server/src/app.js --config server/nodemon.json",
+    "build-be-dev": "npm run clean-be && babel server/src -d server/bin",
+    "build-be-prod": "npm run clean-be && babel server/src -d server/bin",
+    "clean-be": "rm -rf ./server/bin/*",
+    "lint": "eslint -c .eslintrc client/js"
   },
   "repository": {
     "type": "git",

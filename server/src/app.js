@@ -1,6 +1,7 @@
 /**
  * Created by chan on 11/22/16.
  */
+require('babel-polyfill');
 const express = require('express');
 const app = new express();
 const path = require('path');
@@ -17,11 +18,11 @@ app.use(express.static('client'));
  * static files; instead we can use a web server such as nginx for static resources.
  */
 app.get('/assets/*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, '../client/style' + req.path));
+    res.sendFile(path.resolve(__dirname, '../../client/style' + req.path));
 });
 
 app.get('/build/*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, '../client/build' + req.path));
+    res.sendFile(path.resolve(__dirname, '../../client/build' + req.path));
 });
 
 app.use(bodyParser.json()); // for parsing application/json
@@ -30,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x
 app.use('/api', router);
 
 app.get('*', function(req, res) {
-    res.sendFile(path.resolve(__dirname, '..', 'client', 'app.html'));
+    res.sendFile(path.resolve(__dirname, '../../client/build', 'app.html'));
 });
 
 app.listen(port, function() {
