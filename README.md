@@ -91,6 +91,12 @@ In a more complex app, common resources might come from different CDNs (one for 
 
 React itself is quite simple. There are not many choices to make, and the few choices you have to make present their tradeoffs clearly. This starter kit only has the following preferences for React, and feel free to remove any or all of them from .eslintrc:
 
+*Remember to run this command:*
+```
+npm info "eslint-config-airbnb@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "eslint-config-airbnb@latest"
+```
+*to get the correct versions of its peer dependencies.*
+
 If you are concerned with React's performance, look at [React's guide for optimization](https://facebook.github.io/react/docs/optimizing-performance.html), and also look at the notes for React's [reconciliation algorithm](https://facebook.github.io/react/docs/reconciliation.html) (look for "Tradeoffs"). Keep in mind that if you use Redux and its [connect()](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options) function, chances are you don't have to optimize `shouldComponentUpdate()` yourself.
 
 #### CSS with React

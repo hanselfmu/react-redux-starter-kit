@@ -1,6 +1,6 @@
 {
   "name": "react-redux-starter-kit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "React + Redux starter kit for frontend, including a simple backend structure.",
   "main": "server.js",
   "engines": {
@@ -20,7 +20,7 @@
     "build-be-dev": "npm run clean-be && babel server/src -d server/bin",
     "build-be-prod": "npm run clean-be && babel server/src -d server/bin",
     "clean-be": "rm -rf ./server/bin/*",
-    "lint": "eslint -c .eslintrc client/js"
+    "lint": "eslint -c client/.eslintrc client/js"
   },
   "repository": {
     "type": "git",
@@ -66,6 +66,11 @@
     "babel-preset-stage-3": "^6.17.0",
     "babel-register": "^6.18.0",
     "css-loader": "^0.26.1",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.8.0",
     "extract-text-webpack-plugin": "^2.0.0-beta.4",
     "node-sass": "^3.13.0",
     "nodemon": "^1.11.0",
