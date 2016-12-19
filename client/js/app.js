@@ -24,7 +24,7 @@ const store = createStore(
     applyMiddleware(...middleware)
 );
 
-const history = syncHistoryWithStore(browserHistory, store)
+const history = syncHistoryWithStore(browserHistory, store);
 
 render((
     <Provider store={store}>

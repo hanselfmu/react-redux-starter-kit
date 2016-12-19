@@ -34,20 +34,16 @@ export const updateTodo = createAction(ActionTypes.UPDATE_TODO, (id, text, statu
 
 export const deleteTodo = createAction(ActionTypes.DELETE_TODO, id => ({ id }));
 
-export const getTodos = createAction(ActionTypes.GET_TODOS, () => {
-    return dispatch => {
-        api.getTodos().then(res => {
-            dispatch(receiveTodos(res));
-        })
-    }
-});
-
 export const receiveTodos = createAction(ActionTypes.RECEIVE_TODOS);
 
-export const saveTodos = createAction(ActionTypes.SAVE_TODOS, (todos) => {
-    return dispatch => {
-        api.saveTodos(todos).then(res => {
-            console.log(res);
-        });
-    }
+export const getTodos = createAction(ActionTypes.GET_TODOS, () => dispatch => {
+    api.getTodos().then(res => {
+        dispatch(receiveTodos(res));
+    });
+});
+
+export const saveTodos = createAction(ActionTypes.SAVE_TODOS, (todos) => dispatch => {
+    api.saveTodos(todos).then(res => {
+        console.log(res);
+    });
 });

@@ -12,16 +12,16 @@ const request = (url, method, body) => {
             "Content-Type": 'application/json;charset=utf-8'
         },
         method
-    }
+    };
 
     if (body) params.body = JSON.stringify(body);
 
     return fetch(`${urlPrefix}${url}`, params)
         .then(response => response.json())
-        .catch(err => { console.log('error making request') })
-}
+        .catch(err => { console.log('error making request'); });
+};
 
 export default {
     getTodos: () => request('todos', 'GET'),
     saveTodos: (todos) => request('todos', 'PUT', todos)
-}
+};

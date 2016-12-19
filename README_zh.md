@@ -184,6 +184,18 @@ https://github.com/nodejs/node-eps/blob/master/002-es6-modules.md#54-es-consumin
 
 尽管Javascript提供了[自动分号插入](http://www.ecma-international.org/ecma-262/6.0/#sec-automatic-semicolon-insertion)，它还是会在一些特殊情况时给开发人员造成极大困扰。
 
+#### 代码检验
+
+我使用Eslint作为代码检验工具，但是它不是必需的，也没有被结合在Webpack的配置中。我个人不是很喜欢开发人员为了一些代码格式的偏好来学习一门工具，以及这门工具带来的各种各样的插件。
+
+从另一个角度来说，如果你对你的代码标准要求比较严格的话，我准备了两套不同的检验标准：*.eslintrc.js* 和 *.fixable.eslintrc.js*。我自己会固定使用 *.fixable.eslintrc.js*（通过`npm run lint-fix`来实现)，来帮助我自动修复一些小问题，比如console信息，少了分号，等等。
+
+*使用下面这条语句：*
+```
+npm info "eslint-config-airbnb@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "eslint-config-airbnb@latest"
+```
+*安装正确的Airbnb config的peer dependencies。*
+
 ### CSS与Sass
 
 #### 基本规则

@@ -20,7 +20,8 @@
     "build-be-dev": "npm run clean-be && babel server/src -d server/bin",
     "build-be-prod": "npm run clean-be && babel server/src -d server/bin",
     "clean-be": "rm -rf ./server/bin/*",
-    "lint": "eslint -c client/.eslintrc client/js"
+    "lint": "eslint -c client/.eslintrc.js client/js; exit 0",
+    "lint-fix": "eslint --no-eslintrc --fix -c client/.fixable.eslintrc.js client/js; exit 0"
   },
   "repository": {
     "type": "git",

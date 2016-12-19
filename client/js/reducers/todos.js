@@ -27,7 +27,7 @@ const defaultState = {
     data: {},
     size: 0,
     nextId: 0
-}
+};
 
 export default handleActions({
     [ActionTypes.ADD_TODO]: (state, action) => {
@@ -43,7 +43,7 @@ export default handleActions({
             },
             size: state.size + 1,
             nextId: state.nextId + 1
-        }
+        };
     },
 
     [ActionTypes.GET_TODO]: (state, action) => ({
@@ -57,7 +57,7 @@ export default handleActions({
         return {
             ...payload,
             size: Object.keys(payload.data).length
-        }
+        };
     }
 
 }, defaultState);

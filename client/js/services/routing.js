@@ -5,7 +5,7 @@
  */
 const onErrorLoading = (err) => {
     console.error('loading failed', err);
-}
+};
 
 const loadRoute = (cb) => (module) => cb(null, module.default);
 
@@ -36,4 +36,4 @@ export const routes = {
             }
         }
     ]
-}
+};

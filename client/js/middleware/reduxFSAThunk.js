@@ -12,6 +12,6 @@ const reduxFSAThunk = store => next => action => {
     } else {
         return next(action);
     }
-}
+};
 
 export default reduxFSAThunk;
