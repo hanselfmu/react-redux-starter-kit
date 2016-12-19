@@ -9,20 +9,23 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import logger from 'redux-logger';
-import fsaThunk from './middleware/reduxFSAThunk';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './reducers';
 import { getTodos } from './actions';
 import { routes } from './services/routing';
+import sagas from './sagas';
 
 import styles from '../style/main.scss';
 
-const middleware = process.env.NODE_ENV === 'production' ? [ fsaThunk, thunk ] : [ fsaThunk, thunk, logger() ];
+const sagaMiddleware = createSagaMiddleware();
+const middleware = process.env.NODE_ENV === 'production' ? [ sagaMiddleware ] : [ sagaMiddleware, logger() ];
 const store = createStore(
     rootReducer,
     applyMiddleware(...middleware)
 );
+
+sagaMiddleware.run(sagas);
 
 const history = syncHistoryWithStore(browserHistory, store);
 

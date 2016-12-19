@@ -2,6 +2,8 @@
 
 [中文版说明文档](README_zh.md)
 
+**You are currently at saga branch.**
+
 *This is a starter kit for simple frontend projects with React and Redux. It also comes with simple promise-based API structure, and Node.js as a thin backend.*
 
 ## Table of Contents

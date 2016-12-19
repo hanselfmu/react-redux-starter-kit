@@ -2,6 +2,8 @@
 
 [English Version](README.md)
 
+**你目前在saga分支。**
+
 *这是一个为React和Redux定做的前端项目启动套件。该套件包含了简单的基于Promise的API结构，以及基于Node.js的薄后端。*
 
 ## 文档目录
